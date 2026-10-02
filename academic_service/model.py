@@ -2,6 +2,62 @@ from  sqlmodel import SQLModel, Field, Relationship
 from datetime import datetime, date
 
 
+
+class Class(SQLModel, table=True):
+    __tablename__ = "class"
+    id: int | None = Field(default=None, primary_key=True)
+    name: str | None = Field(default=None)
+    description: str | None = Field(default=None)
+    created_at: datetime | None = Field(default=None)
+    updated_at: datetime | None = Field(default=None)
+
+
+class Section(SQLModel, table=True):
+    __tablename__ = "section"
+    id: int | None = Field(default=None, primary_key=True)
+    name: str | None = Field(default=None)
+    class_id: int | None = Field(foreign_key="class.id")
+    class_: Class = Relationship()
+    capacity: int | None = Field(default=None)
+    description: str | None = Field(default=None)
+    created_at: datetime | None = Field(default=None)
+    updated_at: datetime | None = Field(default=None)
+
+
+
+class Subject(SQLModel, table=True):
+    __tablename__ = "subject"
+    id: int | None = Field(default=None, primary_key=True)
+    name: str | None = Field(default=None)
+    code: str | None = Field(default=None)
+    description: str | None = Field(default=None)
+    created_at: datetime | None = Field(default=None)
+    updated_at: datetime | None = Field(default=None)
+
+
+class SubjectType(SQLModel, table=True):
+    __tablename__ = "subjecttype"
+    id: int | None = Field(default=None, primary_key=True)
+    name: str | None = Field(default=None)
+    description: str | None = Field(default=None)
+    status: str | None = Field(default=None)
+    created_at: datetime | None = Field(default=None)
+    updated_at: datetime | None = Field(default=None)
+
+
+class TeacherAssignment(SQLModel, table=True):
+    __tablename__ = "teacher_assignment"
+    id: int | None = Field(default=None, primary_key=True)
+    teacher_id: int 
+    subject_id: int | None = Field(foreign_key="subject.id")
+    subject: Subject = Relationship()
+    section_id: int | None = Field(foreign_key="section.id")
+    section: Section = Relationship()
+    academic_year_id: int
+    created_at: datetime | None = Field(default=None)
+    updated_at: datetime | None = Field(default=None)
+
+
 class AcademicYear(SQLModel, table=True):
     __tablename__ = "academicyear"
     id: int | None = Field(primary_key = True)
@@ -38,26 +94,6 @@ class AcademicSession(SQLModel, table=True):
     academic_term_id: AcademicTerm = Relationship()
     start_date: date | None = Field(default=None)
     end_date: date | None = Field(default=None)
-    status: str | None = Field(default=None)
-    created_at: datetime | None = Field(default=None)
-    updated_at: datetime | None = Field(default=None)
-
-
-class Subject(SQLModel, table=True):
-    __tablename__ = "subject"
-    id: int | None = Field(default=None, primary_key=True)
-    name: str | None = Field(default=None)
-    code: str | None = Field(default=None)
-    description: str | None = Field(default=None)
-    created_at: datetime | None = Field(default=None)
-    updated_at: datetime | None = Field(default=None)
-
-
-class SubjectType(SQLModel, table=True):
-    __tablename__ = "subjecttype"
-    id: int | None = Field(default=None, primary_key=True)
-    name: str | None = Field(default=None)
-    description: str | None = Field(default=None)
     status: str | None = Field(default=None)
     created_at: datetime | None = Field(default=None)
     updated_at: datetime | None = Field(default=None)
