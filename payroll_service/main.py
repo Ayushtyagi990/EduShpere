@@ -58,6 +58,10 @@ app.add_middleware(JWTMiddleware)
 ZERO = Decimal("0")
 PROTECTED_FIELDS = {"id", "created_at"}
 
+@app.on_event("startup")
+def startup():
+    create_db_and_tables()
+
 
 def verify_token(credentials: HTTPAuthorizationCredentials = Depends(security)):
     token = credentials.credentials
