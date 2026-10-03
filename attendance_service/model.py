@@ -46,4 +46,4 @@ class AttendanceSummary(SQLModel, table = True):
     total_classes_attended : int | None = Field(default = None)
     attendance_percentage : float | None = Field(default = None)
     created_at : datetime | None = Field(default = None)
-    upated_at : datetime | None = Field(default = None)
+    updated_at : datetime | None = Field(default = None)
