@@ -1,3 +1,4 @@
+<<<<<<< HEAD:examination_service/payroll_service/pyproject.toml
 [project]
 name = "payroll-service"
 version = "0.1.0"
@@ -22,3 +23,30 @@ dependencies = [
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
+=======
+[project]
+name = "academic-service"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "ujjwal",email = "ujjvaltyagi18@gmail.com"}
+]
+requires-python = ">=3.14"
+dependencies = [
+    "fastapi (>=0.142.2,<0.143.0)",
+    "uvicorn (>=0.54.0,<0.55.0)",
+    "psycopg2-binary (>=2.9.13,<3.0.0)",
+    "alembic (>=1.20.0,<2.0.0)",
+    "pymysql (>=1.2.3,<2.0.0)",
+    "sqlmodel (>=0.0.47,<0.0.48)",
+    "python-jose[cryptography] (>=3.5.0,<4.0.0)",
+    "passlib[bcrypt] (>=1.7.4,<2.0.0)",
+    "bcrypt (>=5.0.0,<6.0.0)"
+]
+
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+>>>>>>> 607ce9fe82624ba2ea375c654823fa39d3c7a5a8:academic_service/pyproject.toml
