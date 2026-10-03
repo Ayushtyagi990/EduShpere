@@ -338,9 +338,9 @@ class PensionStatusHistory(SQLModel, table=True):
 
     changed_at: datetime | None = Field(default=None)
 
-    metadata: dict | None = Field(
-        default=None,
-        sa_column=Column(JSON)
-    )
+    extra_metadata: dict | None = Field(
+    default=None,
+    sa_column=Column("metadata", JSON)
+)
 
     created_at: datetime | None = Field(default=None)
