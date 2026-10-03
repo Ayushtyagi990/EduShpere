@@ -1245,6 +1245,8 @@ def get_campuses(
     }
 
 
+
+
 @app.get("/campus/{campus_id}")
 def get_campus_by_id(
     campus_id: int,
