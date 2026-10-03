@@ -1,37 +1,13 @@
-from sqlmodel import SQLModel, Session, create_engine
+from sqlmodel import create_engine, Session, SQLModel
 
-
-# ============================================================
-# DATABASE URL
-# ============================================================
-
-DATABASE_URL = (
-    "mysql+pymysql://root:password@localhost:3306/pension-service"
+engine=create_engine(
+  "mysql+pymysql://root:@127.0.0.1:3306/pension-service",
+  echo=True
 )
-
-
-# ============================================================
-# DATABASE ENGINE
-# ============================================================
-
-engine = create_engine(
-    DATABASE_URL,
-    echo=True,
-)
-
-
-# ============================================================
-# CREATE TABLES
-# ============================================================
-
-def create_db_and_tables():
-    SQLModel.metadata.create_all(engine)
-
-
-# ============================================================
-# DATABASE SESSION
-# ============================================================
-
 def get_session():
-    with Session(engine) as session:
-        yield session
+  with Session(engine) as session:
+    yield session
+
+
+
+SQLModel.metadata.create_all(engine)
