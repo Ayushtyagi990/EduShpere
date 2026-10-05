@@ -1,4 +1,4 @@
-from  sqlmodel import SQLModel, Field, Relationship
+from sqlmodel import SQLModel, Field, Relationship
 from datetime import datetime, date
 
 
@@ -148,4 +148,6 @@ class AcademicHoliday(SQLModel, table=True):
     holiday_type: str | None = Field(default=None)
     description: str | None = Field(default=None)
     status: str | None = Field(default=None)
+
+
     
