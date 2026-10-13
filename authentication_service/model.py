@@ -1,6 +1,6 @@
 from  sqlmodel import SQLModel, Field, Relationship
 from sqlalchemy import Column, JSON
-from datetime import datetime, date
+from datetime import datetime, date, timezone
 from decimal import Decimal
 
 class Address(SQLModel, table = True):
@@ -12,8 +12,9 @@ class Address(SQLModel, table = True):
     pincode : int | None = Field(default = None)
     latitude : float | None = Field(default = None)
     longitude : float | None = Field(default = None)
-    created_at : datetime | None = Field(default = None)
-    updated_at : datetime | None = Field(default = None)
+    created_at : datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    updated_at : datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    
 
 class Rolecode(SQLModel, table = True):
     """ storing rolecode information """
@@ -21,8 +22,8 @@ class Rolecode(SQLModel, table = True):
     id : int | None =  Field(primary_key = True)
     name : str | None = Field(default = None)
     status : bool | None = Field(default = None)
-    created_at : datetime | None = Field(default = None)
-    updated_at : datetime | None = Field(default = None)
+    created_at : datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    updated_at : datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
 
     
@@ -42,7 +43,7 @@ class Users(SQLModel, table=True):
   phone: str | None=Field(default=None)
   email : str | None = Field(index = True, unique = True)
   address_id : int = Field(foreign_key = "address.id")
-  addresss_id: Address = Relationship()
+  address: Address = Relationship()
   emergency_contact: str | None=Field(default=None)
   blood_group: str | None=Field(default=None)
   password: str | None=Field(default=None)
@@ -52,10 +53,10 @@ class Users(SQLModel, table=True):
   registration_no: str | None=Field(default=None)
   consultation_fee: Decimal | None=Field(default=None)
   status: str | None=Field(default=None)
-  rollcodes_id: int = Field(foreign_key = "rollcode.id")
-  rollcodes: Rolecode = Relationship()
-  created_at: date | None=Field(default=None)
-  updated_at: datetime | None=Field(default=None)
+  rolecodes_id: int = Field(foreign_key = "rolecode.id")
+  rolecode: Rolecode = Relationship()
+  created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+  updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
 
 class Permission(SQLModel, table = True):
@@ -64,6 +65,6 @@ class Permission(SQLModel, table = True):
     name: str | None = Field(default = None)
     status : bool | None =  Field(default = None)
     users_id : int = Field(foreign_key = "users.id")
-    users : Users = Relationship()
-    created_at : datetime | None = Field(default = None)
-    updated_at : datetime | None = Field(default = None)
+    user : Users = Relationship()
+    created_at : datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    updated_at : datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
